@@ -25,42 +25,43 @@ class MainActivity : AppCompatActivity() {
 
         val linearLayOutManager = LinearLayoutManager(baseContext,LinearLayoutManager.VERTICAL,false)
         recycleView.layoutManager = linearLayOutManager
+//        loadRSS()
     }
-    private fun loadRSS(){
-        val client = OkHttpClient()
-        val loadRSSAsynce = object:AsyncTask<String, String, String>() {
-            override fun onPreExecute() {
-                Toast.makeText(this@MainActivity,"Please Wait...",Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onPostExecute(result: String?) {
-                super.onPostExecute(result)
-                var rssObject:RSSObject
-                rssObject = Gson().fromJson<RSSObject>(result,RSSObject::class.java)
-                val adapter = FeedAdapter(rssObject,baseContext)
-                recycleView.adapter = adapter
-                adapter.notifyDataSetChanged()
-                Log.d("Result-Tag","Load data to adapter")
-            }
-
-            override fun doInBackground(vararg params: String): String {
-                val builder = Request.Builder()
-                builder.url(params[0])
-                val request = builder.build()
-                try {
-                    val res = client.newCall(request).execute()
-                    return  res.body!!.string()
-                }
-                catch (err:Exception){
-                    err.printStackTrace()
-                }
-                return ""
-            }
-
-
-        }
-        val url_get_data = StringBuilder(RSS_to_JSON_API)
-        url_get_data.append(RSS_Link)
-        loadRSSAsynce.execute(url_get_data.toString())
-    }
+//    private fun loadRSS(){
+//        val client = OkHttpClient()
+//        val loadRSSAsynce = object:AsyncTask<String, String, String>() {
+//            override fun onPreExecute() {
+//                Toast.makeText(this@MainActivity,"Please Wait...",Toast.LENGTH_SHORT).show()
+//            }
+//
+//            override fun onPostExecute(result: String?) {
+//                super.onPostExecute(result)
+//                var rssObject:RSSObject
+//                rssObject = Gson().fromJson<RSSObject>(result,RSSObject::class.java)
+//                val adapter = FeedAdapter(rssObject,baseContext)
+//                recycleView.adapter = adapter
+//                adapter.notifyDataSetChanged()
+//                Log.d("Result-Tag","Load data to adapter")
+//            }
+//
+//            override fun doInBackground(vararg params: String): String {
+//                val builder = Request.Builder()
+//                builder.url(params[0])
+//                val request = builder.build()
+//                try {
+//                    val res = client.newCall(request).execute()
+//                    return  res.body!!.string()
+//                }
+//                catch (err:Exception){
+//                    err.printStackTrace()
+//                }
+//                return ""
+//            }
+//
+//
+//        }
+//        val url_get_data = StringBuilder(RSS_to_JSON_API)
+//        url_get_data.append(RSS_Link)
+//        loadRSSAsynce.execute(url_get_data.toString())
+//    }
 }
