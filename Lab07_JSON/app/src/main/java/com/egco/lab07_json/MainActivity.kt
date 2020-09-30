@@ -7,6 +7,8 @@ import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.egco.lab07_json.Adapter.FeedAdapter
+import com.egco.lab07_json.Model.DataProvider
+import com.egco.lab07_json.Model.Movies
 import com.egco.lab07_json.Model.RSSObject
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
@@ -22,6 +24,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+//        var rssObject:Movies
+        val data = DataProvider.getData()
+        val adapter = FeedAdapter(data,baseContext)
+        recycleView.adapter = adapter
+        adapter.notifyDataSetChanged()
 
         val linearLayOutManager = LinearLayoutManager(baseContext,LinearLayoutManager.VERTICAL,false)
         recycleView.layoutManager = linearLayOutManager

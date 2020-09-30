@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.egco.lab07_json.Model.Movies
 import com.egco.lab07_json.Model.RSSObject
 import com.egco.lab07_json.R
 import kotlinx.android.synthetic.main.row.view.*
@@ -22,7 +23,7 @@ class FeedViewHolder (itemView: View):RecyclerView.ViewHolder(itemView){
     }
 }
 
-class FeedAdapter (private val rssObject:RSSObject, private val mContext:Context):RecyclerView.Adapter<FeedViewHolder>(){
+class FeedAdapter (private val rssObject:ArrayList<Movies>, private val mContext:Context):RecyclerView.Adapter<FeedViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolder {
         val itemView = inflater.inflate(R.layout.row, parent, false)
@@ -32,13 +33,13 @@ class FeedAdapter (private val rssObject:RSSObject, private val mContext:Context
     private val inflater:LayoutInflater = LayoutInflater.from(mContext)
 
     override fun onBindViewHolder(holder: FeedViewHolder, position: Int) {
-        holder.txtTitle.text = rssObject.items[position].title
-        holder.txtPubDate.text = rssObject.items[position].pubDate
-        holder.txtContent.text = rssObject.items[position].content
+        holder.txtTitle.text = rssObject[position].name
+        holder.txtPubDate.text = rssObject[position].Year
+        holder.txtContent.text = rssObject[position].Star
     }
 
     override fun getItemCount(): Int {
-       return rssObject.items.size
+       return rssObject.size
     }
 
 }
