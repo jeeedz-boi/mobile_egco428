@@ -21,6 +21,8 @@ class MainActivity : AppCompatActivity() {
     private val file: String = "mydata.txt"
     private var adapter: ArrayAdapter<String>? = null
     private var arrayAll = arrayListOf<String>()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -47,13 +49,14 @@ class MainActivity : AppCompatActivity() {
         var all = StringBuilder()
         try {
             adapter!!.clear()
-//            arrayAll = arrayListOf<String>()
+//            arrayAll.clear()
             val fIn = openFileInput(file)
             val mFile = InputStreamReader(fIn)
             val buffer = BufferedReader(mFile)
             var line = buffer.readLine()
 
             while(line != null){
+
                 adapter!!.add(line)
 //                arrayAll.add(line)
                 all.append(line+"\n")
