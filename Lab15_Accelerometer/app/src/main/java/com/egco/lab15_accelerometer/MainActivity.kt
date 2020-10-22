@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        shakeText.setBackgroundColor(Color.BLUE)
+//        shakeText.setBackgroundColor(Color.BLUE)
 
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         lastUpdate = System.currentTimeMillis()
@@ -54,18 +54,27 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
         val Accel = (x*x+y*y+z*z)/(SensorManager.GRAVITY_EARTH*SensorManager.GRAVITY_EARTH)
         val actualTime = System.currentTimeMillis()
-        if (Accel >= 2){
+        if (Accel >= 1.5){
             if(actualTime - lastUpdate < 200){
                 return
             }
-            lastUpdate = actualTime
-            Toast.makeText(this, "Device is shuffled", Toast.LENGTH_SHORT).show()
-            if(color){
-                shakeText.setBackgroundColor(Color.RED)
+            val rands = (0..10).random()
+            textView.text = rands.toString()
+            if(rands == 5){
+                Toast.makeText(this, "YOU WIN!", Toast.LENGTH_SHORT).show()
+                textView.setTextColor(Color.RED)
             }
             else{
-                shakeText.setBackgroundColor(Color.BLUE)
+                textView.setTextColor(Color.BLUE)
             }
+            lastUpdate = actualTime
+//            Toast.makeText(this, "Device is shuffled", Toast.LENGTH_SHORT).show()
+//            if(color){
+//                shakeText.setBackgroundColor(Color.RED)
+//            }
+//            else{
+//                shakeText.setBackgroundColor(Color.BLUE)
+//            }
             color = !color
         }
     }
