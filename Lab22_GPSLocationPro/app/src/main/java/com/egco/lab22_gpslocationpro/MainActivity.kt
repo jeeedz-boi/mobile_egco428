@@ -68,5 +68,3 @@ class MainActivity : AppCompatActivity() {
         Log.d("GPSStatus", "On Pause!")
     }
 }
-
-//AIzaSyDnAzSPxFtuF8PXuGLOa0s7sdEKsskqa6o
