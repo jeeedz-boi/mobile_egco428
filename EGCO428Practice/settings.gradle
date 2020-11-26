@@ -1,0 +1,2 @@
+include ':app'
+rootProject.name = "EGCO428 Practice"
